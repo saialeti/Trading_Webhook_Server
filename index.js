@@ -18,13 +18,15 @@ app.post('/webhook', async (req, res) => {
 
   try {
     const discordWebhookURL = 'https://discord.com/api/webhooks/1393671411041702000/ts26-MxeDyqQ5FqfSF9zqVOc2rb__LGdNhxg3h0twuS64zCK3LMBR04zpwU1hf-l2Acx';
-
+    const tradingBotURL = '/trade'
+    const tradingBot_Response = await axios.post(tradingBotURL, req.body);
+    console.log('✅ Order Placed');
     const response = await axios.post(discordWebhookURL, req.body);
-
     console.log('✅ Sent to Discord!');
-    res.status(200).send('Forwarded to Discord!');
+
+    res.status(200).send('Forwarded to all services!');
   } catch (error) {
-    console.error('❌ Error sending to Discord:', error.response?.data || error.message);
+    console.error('❌ Error sending to services:', error.response?.data || error.message);
     res.status(500).send('Error forwarding to Discord');
   }
 });
