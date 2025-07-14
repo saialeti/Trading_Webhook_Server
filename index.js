@@ -17,8 +17,8 @@ app.post('/webhook', async (req, res) => {
   console.log('📦 Body:', JSON.stringify(req.body, null, 2));
 
   try {
-    const discordWebhookURL = 'https://discord.com/api/webhooks/1393671411041702000/ts26-MxeDyqQ5FqfSF9zqVOc2rb__LGdNhxg3h0twuS64zCK3LMBR04zpwU1hf-l2Acx';
-    const tradingBotURL = '/trade'
+    const discordWebhookURL = 'https://discord.com/api/webhooks/1383162473582039111/3AFibS9CImKmU8NNrbjxYdvfr8HzLjfUgfuWFkDav6U8RXhvtWXMzRuu2okdbZPypHEZ';
+    const tradingBotURL = 'https://trading-bot-1-kas9.onrender.com/trade'
     const tradingBot_Response = await axios.post(tradingBotURL, req.body);
     console.log('✅ Order Placed');
     const response = await axios.post(discordWebhookURL, req.body);
