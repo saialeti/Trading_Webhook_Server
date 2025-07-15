@@ -3,7 +3,7 @@ const cors = require('cors');
 const axios = require('axios');
 const app = express();
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(cors());
@@ -18,14 +18,10 @@ app.post('/webhook', async (req, res) => {
 
   try {
     const discordWebhookURL = 'https://discord.com/api/webhooks/1393671411041702000/ts26-MxeDyqQ5FqfSF9zqVOc2rb__LGdNhxg3h0twuS64zCK3LMBR04zpwU1hf-l2Acx';
-    const tradingBotURL = 'http://localhost:3000/trade'; // or your server's IP and port
-
-    // Forward request to trading bot
+    const tradingBotURL = 'https://trading-bot-1-kas9.onrender.com/trade'
     const tradingBot_Response = await axios.post(tradingBotURL, req.body);
-    console.log('✅ Order Placed:', tradingBot_Response.data);
-
-    // Forward request to Discord webhook
-    const discordResponse = await axios.post(discordWebhookURL, req.body);
+    console.log('✅ Order Placed');
+    const response = await axios.post(discordWebhookURL, req.body);
     console.log('✅ Sent to Discord!');
 
     res.status(200).send('Forwarded to all services!');
@@ -40,6 +36,6 @@ app.get('/', (req, res) => {
   res.send('🚀 Webhook Server is up and running');
 });
 
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`🚀 Webhook server running at http://0.0.0.0:${PORT}`);
+app.listen(PORT, () => {
+  console.log(`🚀 Webhook server running at http://localhost:${PORT}`);
 });
